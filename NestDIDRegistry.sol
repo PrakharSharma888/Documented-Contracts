@@ -87,6 +87,11 @@ contract NestDIDRegistry {
         return (recoverSigner(message, _sig) == owners[_identity]);
     }
 
+     /**
+    * @dev This function recovers/identifies the associated public key used to sign a message
+    * @param message Message in bytes32
+    * @param sig Signature
+     */
     function recoverSigner(bytes32 message, bytes memory sig)  internal pure  returns(address) {
        uint8 v;
        bytes32 r;
@@ -95,6 +100,11 @@ contract NestDIDRegistry {
        return ecrecover(message, v, r, s);
     }
 
+     /**
+    * @dev This function split the signatures into EDSCA scheame of v,r,s
+    * @param sig Signature
+    * @return v,r,s of the transaction
+     */
     function splitSignature(bytes memory sig)   internal pure returns(uint8, bytes32, bytes32) {
        require(sig.length == 65);
        bytes32 r;
